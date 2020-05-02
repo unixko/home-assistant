@@ -1,13 +1,9 @@
 {
   "domain": "daikin",
-  "name": "Daikin",
-  "documentation": "https://www.home-assistant.io/components/daikin",
-  "requirements": [
-    "pydaikin==1.4.0"
-  ],
-  "dependencies": [],
-  "codeowners": [
-    "@fredrike",
-    "@rofrantz"
-  ]
+  "name": "Daikin AC",
+  "config_flow": true,
+  "documentation": "https://www.home-assistant.io/integrations/daikin",
+  "requirements": ["pydaikin==1.6.3"],
+  "codeowners": ["@fredrike"],
+  "quality_scale": "platinum"
 }

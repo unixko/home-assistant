@@ -1,8 +1,15 @@
 """Support for Tuya covers."""
 from homeassistant.components.cover import (
-    ENTITY_ID_FORMAT, SUPPORT_CLOSE, SUPPORT_OPEN, SUPPORT_STOP, CoverDevice)
+    ENTITY_ID_FORMAT,
+    SUPPORT_CLOSE,
+    SUPPORT_OPEN,
+    SUPPORT_STOP,
+    CoverEntity,
+)
 
 from . import DATA_TUYA, TuyaDevice
+
+PARALLEL_UPDATES = 0
 
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
@@ -10,7 +17,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     if discovery_info is None:
         return
     tuya = hass.data[DATA_TUYA]
-    dev_ids = discovery_info.get('dev_ids')
+    dev_ids = discovery_info.get("dev_ids")
     devices = []
     for dev_id in dev_ids:
         device = tuya.get_device_by_id(dev_id)
@@ -20,7 +27,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     add_entities(devices)
 
 
-class TuyaCover(TuyaDevice, CoverDevice):
+class TuyaCover(TuyaDevice, CoverEntity):
     """Tuya cover devices."""
 
     def __init__(self, tuya):

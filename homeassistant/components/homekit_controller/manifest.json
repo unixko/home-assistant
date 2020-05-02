@@ -1,12 +1,9 @@
 {
   "domain": "homekit_controller",
-  "name": "Homekit controller",
-  "documentation": "https://www.home-assistant.io/components/homekit_controller",
-  "requirements": [
-    "homekit[IP]==0.14.0"
-  ],
-  "dependencies": ["configurator"],
-  "codeowners": [
-    "@Jc2k"
-  ]
+  "name": "HomeKit Controller",
+  "config_flow": true,
+  "documentation": "https://www.home-assistant.io/integrations/homekit_controller",
+  "requirements": ["aiohomekit[IP]==0.2.37"],
+  "zeroconf": ["_hap._tcp.local."],
+  "codeowners": ["@Jc2k"]
 }

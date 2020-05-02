@@ -2,33 +2,38 @@
 import logging
 
 from homeassistant.components.light import (
-    ATTR_BRIGHTNESS, SUPPORT_BRIGHTNESS, Light)
+    ATTR_BRIGHTNESS,
+    SUPPORT_BRIGHTNESS,
+    LightEntity,
+)
 
-from . import InsteonEntity
+from .insteon_entity import InsteonEntity
 
 _LOGGER = logging.getLogger(__name__)
 
 MAX_BRIGHTNESS = 255
 
 
-async def async_setup_platform(
-        hass, config, async_add_entities, discovery_info=None):
+async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up the Insteon component."""
-    insteon_modem = hass.data['insteon'].get('modem')
+    insteon_modem = hass.data["insteon"].get("modem")
 
-    address = discovery_info['address']
+    address = discovery_info["address"]
     device = insteon_modem.devices[address]
-    state_key = discovery_info['state_key']
+    state_key = discovery_info["state_key"]
 
-    _LOGGER.debug('Adding device %s entity %s to Light platform',
-                  device.address.hex, device.states[state_key].name)
+    _LOGGER.debug(
+        "Adding device %s entity %s to Light platform",
+        device.address.hex,
+        device.states[state_key].name,
+    )
 
     new_entity = InsteonDimmerDevice(device, state_key)
 
     async_add_entities([new_entity])
 
 
-class InsteonDimmerDevice(InsteonEntity, Light):
+class InsteonDimmerDevice(InsteonEntity, LightEntity):
     """A Class for an Insteon device."""
 
     @property
